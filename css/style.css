@@ -1,16 +1,93 @@
 *{
     box-sizing: border-box;
 }
+
 body{
     font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
 }
+
 a{
     display: inline-flex;
     text-decoration: none;
     color: inherit;
 }
+
 .container{
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+}
+
+/* .box{
+    padding: 10px;
+    border: 1px solid #000;
+} */
+.header {
+    background-color: #007bff;
+}
+
+.header > .container {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0px;
+}
+
+.showcase {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.fa, .fas {
+    font-size: 25px;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 25px 0px;
+    align-items: center;
+    gap: 20px;
+    /* background-color: pink; */
+}
+.left-column {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 20px;
+}
+.card-img{
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+    /* background: #ccc; */
+}
+
+.name-phone {
+    width: 70%;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center
+    
+    ;
+}
+
+.name {
+    margin: 0px;
+}
+.phone {
+    font-size: 16px;
+}
+
+.message-text {
+    width: 50%;
+}
+
+.main {
+    background-color: rgba(255, 192, 203, 0.637);
 }

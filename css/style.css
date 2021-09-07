@@ -12,6 +12,9 @@ a{
     color: inherit;
 }
 
+p {
+    margin: 0px;
+}
 .container{
     max-width: 1200px;
     margin: 0 auto;
@@ -38,7 +41,6 @@ a{
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 15px;
 }
 
 .fa, .fas {
@@ -49,12 +51,12 @@ a{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding: 25px 0px;
+    padding: 15px 0px;
     align-items: center;
-    gap: 20px;
     /* background-color: pink; */
 }
 .left-column {
+    width: 30%;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -72,13 +74,13 @@ a{
     display: flex;
     flex-flow: column;
     justify-content: center;
-    align-items: center
-    
-    ;
+    align-items: center;
+    padding: 15px 0px;
 }
 
 .name {
     margin: 0px;
+    margin-bottom: 20px;
 }
 .phone {
     font-size: 16px;
@@ -86,6 +88,7 @@ a{
 
 .message-text {
     width: 50%;
+    margin: 0px 0px;
 }
 
 .main {

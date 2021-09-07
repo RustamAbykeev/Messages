@@ -2,9 +2,10 @@ let MESSAGES = JSON.parse(DATA)
 console.log(MESSAGES)
 const showcaseEl = document.getElementById('showcase')
 const searchFormEl = document.getElementById('searchForm')
-const messagesEl = document.getElementById('messages')
+const headerEl = document.getElementById('headerCont')
 // const sortSelectEl = document.getElementById('sortSelect')
 renderCards(showcaseEl, MESSAGES)
+renderHeader(headerEl, MESSAGES)
 
 // {
 //     "id": 1,
@@ -15,6 +16,8 @@ renderCards(showcaseEl, MESSAGES)
 //     "date": 1609595510000,
 //     "seen": false
 //   },
+
+
 function unreadMessagesCounter(status) {
     const messagesCount = MESSAGES.length
     let unreadMessages = 0;
@@ -28,6 +31,31 @@ function unreadMessagesCounter(status) {
     // если статус true то cчетчик не изменяется
     return unreadMessages;
 }
+
+// function messagesCountBlock(messagesData = {}) {
+//     return `<div class="messages-count" id="messages">
+//     <h3 class="text">Сообщений: 50</h3>
+// <h3 class="text">Непрочитанных: 30</h3>
+// </div>`
+// }
+
+function renderHeader(headerEl = document, messagesArray = []) {
+    showcaseEl.innerHTML = createHeader(messagesArray).join('')
+}
+
+function createHeader(messagesData = {}) {
+    return `<div><i class="fas fa-sync-alt"></i>
+    <div class="messages-count" id="messages">
+        <h3 class="text">Сообщений: ${messagesData.seen}</h3>
+    <h3 class="text">Непрочитанных: 30</h3>
+    </div>
+    <form class="search-form" id="searchForm">
+        <input type="search" name="search" placeholder="Search message...">
+        <button type="submit">Search</button>
+    </form>
+    </div>`
+}
+
 
 
 

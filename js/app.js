@@ -2,10 +2,11 @@ let MESSAGES = JSON.parse(DATA)
 console.log(MESSAGES)
 const showcaseEl = document.getElementById('showcase')
 const searchFormEl = document.getElementById('searchForm')
-const headerEl = document.getElementById('headerCont')
+const messageCountersEl = document.getElementById('messageCounters')
+const allCount = messagesCounters.firstElementChild.firstElementChild
+const unreadCount = messagesCounters.lastElementChild.firstElementChild
 // const sortSelectEl = document.getElementById('sortSelect')
 renderCards(showcaseEl, MESSAGES)
-renderHeader(headerEl, MESSAGES)
 
 // {
 //     "id": 1,
@@ -18,20 +19,6 @@ renderHeader(headerEl, MESSAGES)
 //   },
 
 
-function unreadMessagesCounter(status) {
-    const messagesCount = MESSAGES.length
-    let unreadMessages = 0;
-    
-    for (i = 0; i < messagesCount; i++) {
-        if (status === false) {
-            unreadMessages += 1;
-        }
-    }
-    //пробежаться по циклу и прочитать значения свойства seen если false то положить в счетчик +1
-    // если статус true то cчетчик не изменяется
-    return unreadMessages;
-}
-
 // function messagesCountBlock(messagesData = {}) {
 //     return `<div class="messages-count" id="messages">
 //     <h3 class="text">Сообщений: 50</h3>
@@ -39,48 +26,14 @@ function unreadMessagesCounter(status) {
 // </div>`
 // }
 
-function renderHeader(headerEl = document, messagesArray = []) {
-    showcaseEl.innerHTML = createHeader(messagesArray).join('')
-}
+// function renderHeader(headerEl = document, messagesArray = []) {
+//     showcaseEl.innerHTML = createHeader(messagesArray).join('')
+// }
 
-function createHeader(messagesData = {}) {
-    return `<div><i class="fas fa-sync-alt"></i>
-    <div class="messages-count" id="messages">
-        <h3 class="text">Сообщений: ${messagesData.seen}</h3>
-    <h3 class="text">Непрочитанных: 30</h3>
-    </div>
-    <form class="search-form" id="searchForm">
-        <input type="search" name="search" placeholder="Search message...">
-        <button type="submit">Search</button>
-    </form>
-    </div>`
-}
-
-
-
-
-function convertDateToHours(date) {
-    convertedDate = new Date(date);
-    if ((convertedDate.getHours()) < 10) {
-        return '0' + (convertedDate.getHours())
-    }
-        return (convertedDate.getHours())
-} 
-
-function convertDateToMinutes(date) {
-    convertedDate = new Date(date);
-    if ((convertedDate.getMinutes()) < 10) {
-        return '0' + (convertedDate.getMinutes())
-    }
-        return (convertedDate.getMinutes())
-} 
-
-function convertDateFormat(date) {
-    convertedDate = new Date(date);
-    return convertedDate.toLocaleDateString();
-} 
 
 function renderCards(showcaseEl = document, messagesArray = []) {
+    allCount.textContent = messagesArray.length
+    unreadCount.textContent = messagesArray.filter(message => !message.seen).length
     showcaseEl.innerHTML = createCardTemplateList(messagesArray).join('')
 }
 
@@ -98,8 +51,8 @@ function createCardTemplate(messagesData = {}) {
         </div>
         </div>
         <div class="message-text">${messagesData.seen ? `<p>${messagesData.text}</p>` : `<p><strong>${messagesData.text}</strong></p>`}</div>
-        <span>${convertDateToHours(messagesData.date)}:${convertDateToMinutes(messagesData.date)}</span>
-        <span>${convertDateFormat(messagesData.date)}</span>
+        <span>${new Date(messagesData.date).date.toLocaleDateString()}</span>
+        <span>${new Date(messagesData.date).toLocaleTimeString().slice(0, 5)}</span>
 </div>`
 }
 

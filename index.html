@@ -10,11 +10,22 @@
 </head>
 <body>
     <header class="header">
-        <div class="container" id="headerCont"></div>
-            
+        <div class="container">
+            <i class="fas fa-sync-alt"></i>
+            <div class="messages-count" id="messagesCounters">
+                <h3 class="text">Сообщений: <span></span></h3>
+            <h3 class="text">Непрочитанных: <span></span></h3>
+            </div>
+            <form class="search-form" id="searchForm">
+                <input type="search" name="search" placeholder="Search message...">
+                <button type="submit">Search</button>
+            </form>
+        </div>
     </header>
     <main class="main">
-        <div class="showcase container" id="showcase"></div>
+        <div class="showcase container" id="showcase">
+
+        </div>
     </main>
     <script src="./js/messages.js"></script>
     <script src="./js/app.js"></script>

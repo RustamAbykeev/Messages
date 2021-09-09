@@ -33,7 +33,7 @@ renderCards(showcaseEl, MESSAGES)
 
 
 function renderCards(showcaseEl = document, messagesArray = []) {
-    allCount.textContent = messagesArray.length
+    allCount.textContent = `${messagesArray.length}`
     unreadCount.textContent = messagesArray.filter(message => !message.seen).length
     messagesArray.sort((a, b) => b.date - a.date) && messagesArray.sort((a, b) => a.seen - b.seen)
     showcaseEl.innerHTML = createCardTemplateList(messagesArray).join('')
@@ -53,7 +53,7 @@ function createCardTemplate(messagesData = {}) {
         <a href="tel:${messagesData.phone}" class="phone">${messagesData.phone}</a>
         </div>
         </div>
-        <div class="message-text">${messagesData.seen ? `<p>${messagesData.text}</p>` : `<p><strong>${messagesData.text}</strong></p>`}</div>
+        <div class="message-text">${messagesData.seen ? `<p>${messagesData.text}</p>` : `<p class="unread-text">${messagesData.text}</></p>`}</div>
         <span>${new Date(messagesData.date).toLocaleDateString()}</span>
         <span>${new Date(messagesData.date).toLocaleTimeString().slice(0, 5)}</span>
 </div>`

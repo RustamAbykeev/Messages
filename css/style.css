@@ -53,6 +53,7 @@ h3 {
 .text {
     margin: auto 100px;
 }
+
 .showcase {
     width: 100%;
     display: flex;
@@ -70,6 +71,10 @@ h3 {
     padding: 15px 0px;
     align-items: center;
     /* background-color: pink; */
+}
+
+.unread-text {
+    font-weight: 700;
 }
 .left-column {
     width: 30%;

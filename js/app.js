@@ -1,4 +1,5 @@
 let MESSAGES = JSON.parse(DATA)
+// console.log(MESSAGES)
 console.log(MESSAGES)
 const showcaseEl = document.getElementById('showcase')
 const searchFormEl = document.getElementById('searchForm')
@@ -34,8 +35,10 @@ renderCards(showcaseEl, MESSAGES)
 function renderCards(showcaseEl = document, messagesArray = []) {
     allCount.textContent = messagesArray.length
     unreadCount.textContent = messagesArray.filter(message => !message.seen).length
+    messagesArray.sort((a, b) => b.date - a.date) && messagesArray.sort((a, b) => a.seen - b.seen)
     showcaseEl.innerHTML = createCardTemplateList(messagesArray).join('')
 }
+
 
 function createCardTemplateList (messagesArray = []) {
     return messagesArray.map(messagesData => createCardTemplate(messagesData))
@@ -51,7 +54,7 @@ function createCardTemplate(messagesData = {}) {
         </div>
         </div>
         <div class="message-text">${messagesData.seen ? `<p>${messagesData.text}</p>` : `<p><strong>${messagesData.text}</strong></p>`}</div>
-        <span>${new Date(messagesData.date).date.toLocaleDateString()}</span>
+        <span>${new Date(messagesData.date).toLocaleDateString()}</span>
         <span>${new Date(messagesData.date).toLocaleTimeString().slice(0, 5)}</span>
 </div>`
 }
@@ -61,7 +64,7 @@ function createCardTemplate(messagesData = {}) {
 searchFormEl.addEventListener('submit', e => {
     e.preventDefault()
     const query = e.target.search.value.trim().toLowerCase().split(' ').filter(Boolean)
-    console.log(query);
+    // console.log(query);
     const searchFields = ['name', 'phone', 'text']
     MESSAGES = JSON.parse(DATA).filter(message => { 
         return query.every(word => {

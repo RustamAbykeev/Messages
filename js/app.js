@@ -1,11 +1,12 @@
 let MESSAGES = JSON.parse(DATA)
 // console.log(MESSAGES)
-console.log(MESSAGES)
+// console.log(MESSAGES)
 const showcaseEl = document.getElementById('showcase')
 const searchFormEl = document.getElementById('searchForm')
 const messageCountersEl = document.getElementById('messageCounters')
 const allCount = messagesCounters.firstElementChild.firstElementChild
 const unreadCount = messagesCounters.lastElementChild.firstElementChild
+const messageTextEl = document.getElementById('MessageText')
 // const sortSelectEl = document.getElementById('sortSelect')
 renderCards(showcaseEl, MESSAGES)
 
@@ -36,6 +37,8 @@ function renderCards(showcaseEl = document, messagesArray = []) {
     allCount.textContent = `${messagesArray.length}`
     unreadCount.textContent = messagesArray.filter(message => !message.seen).length
     messagesArray.sort((a, b) => b.date - a.date) && messagesArray.sort((a, b) => a.seen - b.seen)
+    // console.dir(messagesArray)
+    // console.log(typeof(messagesArray))
     showcaseEl.innerHTML = createCardTemplateList(messagesArray).join('')
 }
 
@@ -45,7 +48,7 @@ function createCardTemplateList (messagesArray = []) {
 }
 
 function createCardTemplate(messagesData = {}) {
-    return `<div class="card">
+    return `<div class="card" id="cardId">
     <div class="left-column">
                 <img class="card-img" src="${messagesData.avatar}" alt="${messagesData.name}" width="1" height="1" loading="lazy" decoding="async">
                 <div class="name-phone">
@@ -53,12 +56,11 @@ function createCardTemplate(messagesData = {}) {
         <a href="tel:${messagesData.phone}" class="phone">${messagesData.phone}</a>
         </div>
         </div>
-        <div class="message-text">${messagesData.seen ? `<p>${messagesData.text}</p>` : `<p class="unread-text">${messagesData.text}</></p>`}</div>
+        <div class="message-text" id="messageText">${messagesData.seen ? `<p>${messagesData.text}</p>` : `<p class="unread-text">${messagesData.text}</></p>`}</div>
         <span>${new Date(messagesData.date).toLocaleDateString()}</span>
         <span>${new Date(messagesData.date).toLocaleTimeString().slice(0, 5)}</span>
 </div>`
 }
-
 
 
 searchFormEl.addEventListener('submit', e => {
@@ -75,4 +77,17 @@ searchFormEl.addEventListener('submit', e => {
     })
     // console.table(MESSAGES);
     renderCards(showcaseEl, MESSAGES);
+})
+
+document.body.addEventListener('click', e => {
+    e.preventDefault()
+    const clickedText = e.target.closest('.message-text')
+    
+    if (clickedText) { () => {
+        MESSAGES.seen = true;
+    }
+        console.log(MESSAGES.seen)
+    }
+    
+    renderCards(showcaseEl, MESSAGES)
 })

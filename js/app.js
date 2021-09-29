@@ -42,6 +42,7 @@ function renderCards(showcaseEl = document, messagesArray = []) {
     showcaseEl.innerHTML = createCardTemplateList(messagesArray).join('')
 }
 
+// console.dir(MESSAGES.map(messagesData => createCardTemplate(messagesData)));
 
 function createCardTemplateList (messagesArray = []) {
     return messagesArray.map(messagesData => createCardTemplate(messagesData))

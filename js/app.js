@@ -36,6 +36,7 @@ renderCards(showcaseEl, MESSAGES)
 function renderCards(showcaseEl = document, messagesArray = []) {
     allCount.textContent = `${messagesArray.length}`
     unreadCount.textContent = messagesArray.filter(message => !message.seen).length
+    //переписать строчку используя order
     messagesArray.sort((a, b) => b.date - a.date) && messagesArray.sort((a, b) => a.seen - b.seen)
     // console.dir(messagesArray)
     // console.log(typeof(messagesArray))
@@ -82,11 +83,11 @@ searchFormEl.addEventListener('submit', e => {
 document.body.addEventListener('click', e => {
     e.preventDefault()
     const clickedText = e.target.closest('.message-text')
+    //вытащить id сообщения по которому кликнуля  чяч ч  с  
     
     if (clickedText) { () => {
-        MESSAGES.seen = true;
+        // MESSAGES = JSON.parse(DATA).
     }
-        console.log(MESSAGES.seen)
     }
     
     renderCards(showcaseEl, MESSAGES)

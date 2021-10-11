@@ -73,6 +73,10 @@ h3 {
     /* background-color: pink; */
 }
 
+.read-text {
+    font-weight: 400;
+}
+
 .unread-text {
     font-weight: 700;
 }

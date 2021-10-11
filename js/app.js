@@ -10,6 +10,40 @@ const messageTextEl = document.getElementById('MessageText')
 // const sortSelectEl = document.getElementById('sortSelect')
 renderCards(showcaseEl, MESSAGES)
 
+// const messagesIds = MESSAGES.map((messageData) => messageData.id);
+const filteredMessages = [...MESSAGES];
+// console.log(filteredMessages)
+
+showcaseEl.addEventListener('click', e => {
+    const clickedText = e.target.closest('.message-text');
+    if (clickedText) {
+        const text = clickedText.firstElementChild
+        const id = clickedText.closest('.card').dataset.id
+        console.log(id);
+        // const textClass = text.classList.value
+        if (text.classList.value === 'unread-text') {
+            text.classList.remove('unread-text');
+            text.classList.add('read-text');
+        } else {
+            const searchField = 'id';
+            const deleteIdx = filteredMessages.includes(searchField);
+            //удалить из массива элемент по индексу элемента, который содержит значение кликнутого id-шника и подсунуть этот массив для рендера
+            filteredMessages.splice(deleteIdx, 1)
+            console.log(filteredMessages)
+            renderCards(showcaseEl, filteredMessages)
+        }
+        
+    }
+    // const targetText = clickedText.firstElementChild
+    // if (clickedText && targetText.classList === 'unread-text') {
+    // console.log(targetText)
+    // console.log(id);
+    // console.log(targetText.classList)
+    //вытащить id сообщения по которому кликнуля  чяч ч  с  
+    
+        
+    // }
+})
 // {
 //     "id": 1,
 //     "phone": "+63 (924) 979-2252",
@@ -50,7 +84,7 @@ function createCardTemplateList (messagesArray = []) {
 }
 
 function createCardTemplate(messagesData = {}) {
-    return `<div class="card" id="cardId">
+    return `<div class="card" data-id="${messagesData.id}">
     <div class="left-column">
                 <img class="card-img" src="${messagesData.avatar}" alt="${messagesData.name}" width="1" height="1" loading="lazy" decoding="async">
                 <div class="name-phone">
@@ -58,7 +92,7 @@ function createCardTemplate(messagesData = {}) {
         <a href="tel:${messagesData.phone}" class="phone">${messagesData.phone}</a>
         </div>
         </div>
-        <div class="message-text" id="messageText">${messagesData.seen ? `<p>${messagesData.text}</p>` : `<p class="unread-text">${messagesData.text}</></p>`}</div>
+        <div class="message-text">${messagesData.seen ? `<p class="read-text">${messagesData.text}</p>` : `<p class="unread-text">${messagesData.text}</></p>`}</div>
         <span>${new Date(messagesData.date).toLocaleDateString()}</span>
         <span>${new Date(messagesData.date).toLocaleTimeString().slice(0, 5)}</span>
 </div>`
@@ -81,15 +115,6 @@ searchFormEl.addEventListener('submit', e => {
     renderCards(showcaseEl, MESSAGES);
 })
 
-document.body.addEventListener('click', e => {
-    e.preventDefault()
-    const clickedText = e.target.closest('.message-text')
-    //вытащить id сообщения по которому кликнуля  чяч ч  с  
-    
-    if (clickedText) { () => {
-        // MESSAGES = JSON.parse(DATA).
-    }
-    }
-    
-    renderCards(showcaseEl, MESSAGES)
-})
+// const filteredMessages = MESSAGES.map(id => MESSAGES[i][id]);
+// console.log(filteredMessages);
+

@@ -11,29 +11,22 @@ const messageTextEl = document.getElementById('MessageText')
 renderCards(showcaseEl, MESSAGES)
 
 // const messagesIds = MESSAGES.map((messageData) => messageData.id);
-const filteredMessages = [...MESSAGES];
-// console.log(filteredMessages)
+const filteredMessages = JSON.parse(JSON.stringify(MESSAGES))
 
 showcaseEl.addEventListener('click', e => {
     const clickedText = e.target.closest('.message-text');
     if (clickedText) {
-        const text = clickedText.firstElementChild
         const id = clickedText.closest('.card').dataset.id
-        console.log(id);
-        // const textClass = text.classList.value
-        if (text.classList.value === 'unread-text') {
-            text.classList.remove('unread-text');
-            text.classList.add('read-text');
+        const idIdx = filteredMessages.findIndex(messageIdx => messageIdx.id === +id);
+        // const text = clickedText.firstElementChild
+        if (filteredMessages[idIdx].seen === false) {
+            filteredMessages[idIdx].seen = true
         } else {
-            const searchField = 'id';
-            const deleteIdx = filteredMessages.includes(searchField);
-            //удалить из массива элемент по индексу элемента, который содержит значение кликнутого id-шника и подсунуть этот массив для рендера
-            filteredMessages.splice(deleteIdx, 1)
-            console.log(filteredMessages)
-            renderCards(showcaseEl, filteredMessages)
+            filteredMessages.splice(idIdx, 1);
         }
-        
+        renderCards(showcaseEl, filteredMessages)
     }
+})
     // const targetText = clickedText.firstElementChild
     // if (clickedText && targetText.classList === 'unread-text') {
     // console.log(targetText)
@@ -43,7 +36,7 @@ showcaseEl.addEventListener('click', e => {
     
         
     // }
-})
+
 // {
 //     "id": 1,
 //     "phone": "+63 (924) 979-2252",
@@ -71,7 +64,7 @@ function renderCards(showcaseEl = document, messagesArray = []) {
     allCount.textContent = `${messagesArray.length}`
     unreadCount.textContent = messagesArray.filter(message => !message.seen).length
     //переписать строчку используя order
-    messagesArray.sort((a, b) => b.date - a.date) && messagesArray.sort((a, b) => a.seen - b.seen)
+    messagesArray.sort((a, b) => b.date - a.date) && messagesArray.sort((a, b) => a.seen - b.seen) 
     // console.dir(messagesArray)
     // console.log(typeof(messagesArray))
     showcaseEl.innerHTML = createCardTemplateList(messagesArray).join('')
@@ -92,7 +85,7 @@ function createCardTemplate(messagesData = {}) {
         <a href="tel:${messagesData.phone}" class="phone">${messagesData.phone}</a>
         </div>
         </div>
-        <div class="message-text">${messagesData.seen ? `<p class="read-text">${messagesData.text}</p>` : `<p class="unread-text">${messagesData.text}</></p>`}</div>
+        <div class="message-text">${messagesData.seen ? `<p class="read-text">${messagesData.text}</p>` : `<p class="unread-text">${messagesData.text}</p>`}</div>
         <span>${new Date(messagesData.date).toLocaleDateString()}</span>
         <span>${new Date(messagesData.date).toLocaleTimeString().slice(0, 5)}</span>
 </div>`

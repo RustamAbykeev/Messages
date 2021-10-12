@@ -73,7 +73,7 @@ function renderCards(showcaseEl = document, messagesArray = []) {
     allCount.textContent = `${messagesArray.length}`
     unreadCount.textContent = messagesArray.filter(message => !message.seen).length
     //переписать строчку используя order
-    messagesArray.sort((a, b) => b.date - a.date) && messagesArray.sort((a, b) => a.seen - b.seen) 
+    messagesArray.sort((a, b) => a.seen - b.seen || b.date - a.date)
     // console.dir(messagesArray)
     // console.log(typeof(messagesArray))
     showcaseEl.innerHTML = createCardTemplateList(messagesArray).join('')

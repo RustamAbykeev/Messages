@@ -40,7 +40,15 @@ h3 {
     flex-flow: row nowrap;
     justify-content: space-between;
     align-items: center;
-    padding: 30px 0px;
+    padding: 30px 20px;
+}
+
+.reload-box {
+    min-width: 40px;
+    min-height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .messages-count {

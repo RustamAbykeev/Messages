@@ -7,6 +7,7 @@ const messageCountersEl = document.getElementById('messageCounters')
 const allCount = messagesCounters.firstElementChild.firstElementChild
 const unreadCount = messagesCounters.lastElementChild.firstElementChild
 const messageTextEl = document.getElementById('MessageText')
+const reloadEl = document.getElementById('reset')
 // const sortSelectEl = document.getElementById('sortSelect')
 renderCards(showcaseEl, MESSAGES)
 
@@ -19,12 +20,20 @@ showcaseEl.addEventListener('click', e => {
         const id = clickedText.closest('.card').dataset.id
         const idIdx = filteredMessages.findIndex(messageIdx => messageIdx.id === +id);
         // const text = clickedText.firstElementChild
-        if (filteredMessages[idIdx].seen === false) {
-            filteredMessages[idIdx].seen = true
-        } else {
-            filteredMessages.splice(idIdx, 1);
-        }
+        (filteredMessages[idIdx].seen) ? filteredMessages.splice(idIdx, 1) : filteredMessages[idIdx].seen = true
+        // if (filteredMessages[idIdx].seen === false) {
+        //     filteredMessages[idIdx].seen = true
+        // } else {
+        //     filteredMessages.splice(idIdx, 1);
+        // }
         renderCards(showcaseEl, filteredMessages)
+    }
+})
+
+reloadEl.addEventListener('click', e => {
+    const clickedResetBtn = e.target.closest('.reset-box')
+    if (clickedResetBtn) {
+        renderCards(showcaseEl, MESSAGES)
     }
 })
     // const targetText = clickedText.firstElementChild

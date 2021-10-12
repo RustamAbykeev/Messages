@@ -7,7 +7,7 @@ const messageCountersEl = document.getElementById('messageCounters')
 const allCount = messagesCounters.firstElementChild.firstElementChild
 const unreadCount = messagesCounters.lastElementChild.firstElementChild
 const messageTextEl = document.getElementById('MessageText')
-const reloadEl = document.getElementById('reset')
+const resetEl = document.getElementById('reset')
 // const sortSelectEl = document.getElementById('sortSelect')
 renderCards(showcaseEl, MESSAGES)
 
@@ -30,7 +30,7 @@ showcaseEl.addEventListener('click', e => {
     }
 })
 
-reloadEl.addEventListener('click', e => {
+resetEl.addEventListener('click', e => {
     const clickedResetBtn = e.target.closest('.reset-box')
     if (clickedResetBtn) {
         renderCards(showcaseEl, MESSAGES)
